@@ -1,0 +1,44 @@
+:root {
+    /* Paleta de colores */
+    --brand: #1d3557;
+    --brand-hover: #16314a;
+    --accent-gold: #c59f3e;
+
+    --radius: 12px;
+    --shadow: 0 6px 18px rgba(0, 0, 0, .08);
+
+    --ink: #1a1a1a;
+    --muted: #6b7280;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ece9df;
+    background: linear-gradient(140deg, #f0ece3 0%, #ece9df 40%, #e7e3da 100%);
+    color: var(--ink);
+}
+
+.hero {
+    border-radius: var(--radius);
+    background:
+        radial-gradient(900px 300px at 20% -20%, rgba(29, 53, 87, .12), transparent 70%),
+        #ffffff;
+}
+
+.btn-brand {
+    background-color: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.btn-brand:hover {
+    background-color: var(--brand-hover);
+    border-color: var(--brand-hover);
+    color: #fff;
+}
+
+.logo-text {
+    color: var(--accent-gold);
+}
