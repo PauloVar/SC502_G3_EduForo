@@ -1,0 +1,57 @@
+
+:root{
+  --brand: #1d3557;
+  --brand-hover: #16314a;
+  --accent-gold: #c59f3e;
+}
+
+.page-title { color: var(--brand); }
+.page-linkback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.page-linkback::before {
+  content: "\2190";
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.page-linkback:hover {
+  background: #e0e0e0;
+  color: var(--brand-hover);
+}
+
+.panel {
+  background:#fff;
+  border-radius:10px;
+  padding:1rem;
+  box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+
+.card-min { background:#fff; border-radius:10px; padding:1rem; box-shadow:0 3px 8px rgba(0,0,0,0.08); }
+
+
+.badge-soft { display:inline-block; padding:4px 10px; border-radius:999px; font-size:.8rem; background:#e9ecef; color:#1a1a1a; }
+
+.text-muted-90 { color:#6b7280; }
+
+.btn-sm{ padding:.35rem .6rem; border-radius:8px; }
+
+.btn-brand,
+.btn-brand-outline,
+.btn-brand-soft {
+  font-size: 0.95rem;
+}
+
+
+

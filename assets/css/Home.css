@@ -14,78 +14,6 @@ body {
     margin: 0;
 }
 
-.topbar {
-    background-color: #1d3557;
-    color: #c59f3e;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 25px;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo {
-    width: 65px;
-    height: auto;
-    border-radius: 6px;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropbtn {
-    background-color: #c59f3e;
-    color: white;
-    border: none;
-    font-size: 0.95rem;
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 6px;
-}
-
-.dropbtn:hover {
-    background-color: #b4b6b9;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 6px;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: #333;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f2f2f2;
-}
-
-.dropdown-content a:hover {
-    background-color: #f2f2f2;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-
 .main-content {
     flex: 1;
     padding: 30px;
@@ -95,7 +23,7 @@ body {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
 }
 
@@ -121,17 +49,7 @@ body {
 }
 
 .search-form button {
-    background-color: #c59f3e;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.search-form button:hover {
-    background-color: #00357c;
+    flex: 0 0 auto;
 }
 
 .fecha {
@@ -155,8 +73,9 @@ body {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
+
 .main-content h2 {
     margin-bottom: 20px;
     color: #1d3557;
@@ -182,7 +101,7 @@ body {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .extra-block h2 {
@@ -204,7 +123,7 @@ body {
     background: #fff;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
 }
 
@@ -216,20 +135,12 @@ body {
 }
 
 .paginacion button {
-    background: #1d3557;
-    color: #fff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.paginacion button:hover {
-    background: #c59f3e;
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
 }
 
 .paginacion .activo {
-    background: #c59f3e;
+    pointer-events: none;
 }
 
 .footer {
@@ -240,4 +151,17 @@ body {
     font-size: 0.85rem;
     width: 100%;
     margin-top: auto;
+}
+
+.avisos .card {
+    border-left: 4px solid var(--brand);
+}
+
+.avisos {
+  margin-bottom: 2rem;
+}
+
+.avisos .text-end {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
