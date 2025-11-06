@@ -29,11 +29,11 @@ body {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .logo {
-    width: 60px;
+    width: 65px;
     height: auto;
     border-radius: 6px;
 }
