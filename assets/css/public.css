@@ -6,8 +6,29 @@
 }
 
 .page-title { color: var(--brand); }
-.page-linkback { text-decoration: none; }
+.page-linkback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
 
+.page-linkback::before {
+  content: "\2190";
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.page-linkback:hover {
+  background: #e0e0e0;
+  color: var(--brand-hover);
+}
 
 .panel {
   background:#fff;
@@ -24,14 +45,6 @@
 
 .text-muted-90 { color:#6b7280; }
 
-.back-link{
-  display:inline-flex; align-items:center; gap:.4rem;
-  color: var(--brand); font-weight:600; text-decoration:none;
-  padding:.35rem .6rem; border-radius:999px;
-  background:#e9eef6;           /* azul muy suave */
-}
-.back-link:hover{ background:#dbe6f2; color:var(--brand-hover); }
-
 .btn-sm{ padding:.35rem .6rem; border-radius:8px; }
 
 .btn-brand,
@@ -39,4 +52,6 @@
 .btn-brand-soft {
   font-size: 0.95rem;
 }
+
+
 

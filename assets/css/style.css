@@ -35,17 +35,44 @@ body {
     gap: 2rem;
 }
 
-.topbar h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: var(--accent-gold);
-    font-weight: 700;
-}
-
 .topbar .logo-container {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.85rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.topbar .logo-text-group {
+    display: flex;
+     flex-direction: column;
+    line-height: 1.1;
+}
+
+.topbar .logo-container:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.topbar .logo-container:focus-visible {
+    outline: 3px solid rgba(197, 159, 62, 0.45);
+    outline-offset: 4px;
+}
+
+.topbar .logo-title {
+    color: var(--accent-gold);
+    font-size: inherit;
+    line-height: 1;
+}
+
+.topbar .logo-subtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.05em;
 }
 
 .topbar .logo {
@@ -60,9 +87,53 @@ body {
 }
 
 .topbar .dropbtn {
-    border-radius: var(--radius);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
     font-size: 0.95rem;
-    padding: 0.55rem 1.1rem;
+    padding: 0.4rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.topbar .dropbtn:hover,
+.topbar .dropbtn:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.topbar .dropbtn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 2px;
+}
+
+.topbar .user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--brand);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.topbar .user-name {
+    white-space: nowrap;
+}
+
+.topbar .user-caret {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-left: 0.1rem;
 }
 
 .topbar .dropdown-content {
@@ -304,4 +375,3 @@ input[type="radio"]:checked {
 .login-card {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
-

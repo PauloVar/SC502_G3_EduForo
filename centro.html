@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,29 @@
   <link rel="stylesheet" href="assets/css/Home.css">
   <link rel="stylesheet" href="assets/css/public.css">
 </head>
+
 <body style="background:#ece9df;">
   <header class="topbar">
-    <div class="logo-container">
+    <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
       <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
-      <h1>EduForo</h1>
-    </div>
+      <span class="logo-title">EduForo</span>
+    </a>
     <div class="dropdown">
-      <button class="dropbtn btn btn-brand btn-sm">Usuario</button>
+      <button type="button" class="dropbtn">
+        <span class="user-avatar" aria-hidden="true">U</span>
+        <span class="user-name">Usuario</span>
+        <span class="user-caret" aria-hidden="true">▾</span>
+      </button>
       <div class="dropdown-content">
-        <a href="home.html">Volver al Home</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="adminPublicaciones.html">Panel de admin</a>
+        <a href="#" data-action="logout">Cerrar sesión</a>
       </div>
     </div>
   </header>
 
   <main class="container my-4">
-    <a href="home.html" class="page-linkback">&larr; Volver al buscador</a>
+    <a href="home.html" class="page-linkback">Volver al buscador</a>
 
     <section class="panel mt-3">
       <div class="d-flex align-items-center gap-3">
@@ -42,9 +50,13 @@
 
       <div class="d-flex gap-2">
         <a href="centro-publicaciones.html" class="btn btn-brand btn-sm">Ver publicaciones</a>
-        <a href="home.html" class="btn btn-brand-outline btn-sm">Volver al listado</a>
       </div>
     </section>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="assets/js/navbar.js"></script>
+
 </body>
+
 </html>

@@ -14,16 +14,23 @@
 
 <body>
     <header class="topbar">
-        <div class="logo-container">
-            <div class="mx-auto mb-3" style="width:75px;">
-                <img src="assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
-            </div>
-            <h1>EduForo - Panel de administración</h1>
-        </div>
+        <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
+            <img src="assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
+            <span class="logo-text-group">
+                <span class="logo-title">EduForo</span>
+                <span class="logo-subtitle">Panel de administración</span>
+            </span>
+        </a>
         <div class="dropdown">
-            <button class="dropbtn btn btn-brand btn-sm">Usuario</button>
+            <button type="button" class="dropbtn">
+                <span class="user-avatar" aria-hidden="true">U</span>
+                <span class="user-name">Usuario</span>
+                <span class="user-caret" aria-hidden="true">▾</span>
+            </button>
             <div class="dropdown-content">
-                <a href="#">Cerrar sesión</a>
+                <a href="perfil.html">Perfil</a>
+                <a href="adminPublicaciones.html">Panel de admin</a>
+                <a href="#" data-action="logout">Cerrar sesión</a>
             </div>
         </div>
     </header>
@@ -78,7 +85,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="assets/js/navbar.js"></script>
     <script src="assets/js/adminPublicaciones.js"></script>
 
     <footer class="footer">

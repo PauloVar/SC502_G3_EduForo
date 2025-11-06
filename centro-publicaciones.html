@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,29 @@
   <link rel="stylesheet" href="assets/css/Home.css">
   <link rel="stylesheet" href="assets/css/public.css">
 </head>
+
 <body style="background:#ece9df;">
   <header class="topbar">
-    <div class="logo-container">
+    <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
       <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
-      <h1>EduForo</h1>
-    </div>
+      <span class="logo-title">EduForo</span>
+    </a>
     <div class="dropdown">
-      <button class="dropbtn btn btn-brand btn-sm">Usuario</button>
+      <button type="button" class="dropbtn">
+        <span class="user-avatar" aria-hidden="true">U</span>
+        <span class="user-name">Usuario</span>
+        <span class="user-caret" aria-hidden="true">▾</span>
+      </button>
       <div class="dropdown-content">
-        <a href="centro.html">Volver al Centro</a>
-        <a href="home.html">Home</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="adminPublicaciones.html">Panel de admin</a>
+        <a href="#" data-action="logout">Cerrar sesión</a>
       </div>
     </div>
   </header>
 
   <main class="container my-4">
-    <a href="centro.html" class="page-linkback">&larr; Volver al centro</a>
+    <a href="centro.html" class="page-linkback">Volver al centro</a>
     <h1 class="h4 mt-3 page-title">Publicaciones — Colegio Técnico San José</h1>
 
     <div id="listaCentro" class="row g-3 mt-1">
@@ -71,6 +78,10 @@
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="assets/js/navbar.js"></script>
   <script src="assets/js/centro-publicaciones.js"></script>
+
 </body>
+
 </html>

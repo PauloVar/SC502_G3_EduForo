@@ -14,23 +14,26 @@
 <body>
 
   <header class="topbar">
-    <div class="logo-container">
+    <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
       <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
-      <h1>EduForo</h1>
-    </div>
+      <span class="logo-title">EduForo</span>
+    </a>
     <div class="dropdown">
-      <button class="dropbtn btn btn-brand btn-sm">Usuario</button>
+      <button type="button" class="dropbtn">
+        <span class="user-avatar" aria-hidden="true">U</span>
+        <span class="user-name">Usuario</span>
+        <span class="user-caret" aria-hidden="true">▾</span>
+      </button>
       <div class="dropdown-content">
-        <a href="login.html">Iniciar sesión</a>
-        <a href="home.html">Volver al Home</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="adminPublicaciones.html">Panel de admin</a>
+        <a href="#" data-action="logout">Cerrar sesión</a>
       </div>
     </div>
   </header>
 
   <main class="container my-4">
-    <a href="home.html" class="back-link">
-  <span aria-hidden="true">←</span> Volver a inicio
-</a>
+    <a href="home.html" class="page-linkback">Volver a inicio</a>
     <h1 class="h4 page-title mt-2 mb-3">Avisos del MEP</h1>
 
     <form class="row g-2 panel mb-3" id="filtroMep">
@@ -80,7 +83,10 @@
     <p id="sinResultados" class="text-muted mt-3" style="display:none;">No hay avisos con ese criterio.</p>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="assets/js/navbar.js"></script>
   <script src="assets/js/mep-avisos.js"></script>
+  
 </body>
 
 </html>
