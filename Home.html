@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/Home.css">
 </head>
 
+
 <body>
     <header class="topbar">
 
@@ -19,58 +20,136 @@
             </div>
             <h1>EduForo</h1>
         </div>
-        
+
         <div class="dropdown">
             <button class="dropbtn"> Usuario</button>
             <div class="dropdown-content">
                 <a href="#">Perfil</a>
-                <a href="#">Configuración</a>
                 <a href="#">Cerrar sesión</a>
             </div>
     </header>
 
     <div class="container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="#">Ultimos avisos</a></li>
-                    <li><a href="#">Tareas</a></li>
-                    <li><a href="#">Entregados</a></li>
-                    <li><a href="#">Noticias</a></li>
-                </ul>
-            </nav>
-        </aside>
-
         <main class="main-content">
-            <h2>Últimos Avisos</h2>
+            <section class="buscador">
+                <h2>Buscador de Centros Educativos</h2>
+                <form class="search-form">
+                    <input type="text" placeholder="Buscar por nombre del centro...">
+
+                    <select>
+                        <option value="">Provincia</option>
+                        <option>San José</option>
+                        <option>Alajuela</option>
+                        <option>Cartago</option>
+                        <option>Heredia</option>
+                        <option>Guanacaste</option>
+                        <option>Puntarenas</option>
+                        <option>Limón</option>
+                    </select>
+
+                    <select>
+                        <option value="">Cantón</option>
+                        <option>Central</option>
+                        <option>Desamparados</option>
+                        <option>Goicoechea</option>
+                        <option>Escazú</option>
+                    </select>
+
+                    <select>
+                        <option value="">Nivel educativo</option>
+                        <option>Preescolar</option>
+                        <option>Primaria</option>
+                        <option>Secundaria</option>
+                        <option>Técnico</option>
+                    </select>
+
+                    <button type="submit"> Buscar</button>
+                </form>
+
+                <div class="fecha">
+                    <p>Fecha actual: <strong>5 de noviembre de 2025</strong></p>
+                </div>
+            </section>
 
             <section class="avisos">
-                <div class="card">
-                    <h3>Examen de Matemáticas</h3>
-                    <p>El examen se realizará el próximo martes 10 de noviembre en el aula 302.</p>
-                    <span class="date">Publicado: 3 de noviembre, 2025</span>
+                <h2>Avisos Generales del MEP</h2>
+                <div class="avisos-grid">
+                    <div class="card">
+                        <h3>Inicio del curso lectivo 2026</h3>
+                        <p>El curso lectivo dará inicio el 10 de febrero. Se recomienda revisar los lineamientos de
+                            regreso a clases.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Becas disponibles</h3>
+                        <p>Ya están abiertas las inscripciones para becas estudiantiles 2025. Consulte los requisitos en
+                            la plataforma.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Capacitación docente</h3>
+                        <p>Inscripciones abiertas para el programa de innovación pedagógica. Cupos limitados.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="extras">
+                <div class="extra-block">
+                    <h2>Centros Destacados</h2>
+                    <ul>
+                        <li>Escuela Central de San José</li>
+                        <li>Colegio Técnico de Heredia</li>
+                        <li>Liceo de Alajuela</li>
+                    </ul>
                 </div>
 
-                <div class="card">
-                    <h3>Examenes </h3>
-                    <p>Recuerden subir el proyecto al portal antes del viernes 7 de noviembre.</p>
-                    <span class="date">Publicado: 2 de noviembre, 2025</span>
+                <div class="extra-block">
+                    <h2>Publicaciones Recientes</h2>
+                    <ul>
+                        <li>Guía para el nuevo curso lectivo</li>
+                        <li>Resultados de la Feria Científica Nacional</li>
+                        <li>Actualización de protocolos COVID-19</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="resultados">
+                <h2>Resultados de búsqueda</h2>
+
+                <div class="centro-card">
+                    <h3>Escuela Santa Rosa</h3>
+                    <p><strong>Provincia:</strong> Alajuela</p>
+                    <p><strong>Cantón:</strong> Central</p>
+                    <p><strong>Nivel:</strong> Primaria</p>
                 </div>
 
-                <div class="card">
-                    <h3>Charla sobre Ciberseguridad</h3>
-                    <p>Se invita a todos los estudiantes a participar en la charla el lunes 9 de noviembre.</p>
-                    <span class="date">Publicado: 1 de noviembre, 2025</span>
+                <div class="centro-card">
+                    <h3>Colegio Técnico San José</h3>
+                    <p><strong>Provincia:</strong> San José</p>
+                    <p><strong>Cantón:</strong> Goicoechea</p>
+                    <p><strong>Nivel:</strong> Técnico</p>
+                </div>
+
+                <div class="centro-card">
+                    <h3>Liceo de Cartago</h3>
+                    <p><strong>Provincia:</strong> Cartago</p>
+                    <p><strong>Cantón:</strong> Central</p>
+                    <p><strong>Nivel:</strong> Secundaria</p>
+                </div>
+
+                <div class="paginacion">
+                    <button>Anterior</button>
+                    <button class="activo">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>Siguiente</button>
                 </div>
             </section>
         </main>
     </div>
 
-
     <footer class="footer">
         <p>© 2025 EduForo. Todos los derechos reservados.</p>
-
     </footer>
+
 </body>
 
 </html>
