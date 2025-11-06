@@ -26,15 +26,14 @@
 
 <nav class="navBar">
     <ul>
-        <li><a href="/" class="active">Publicaciones</a></li>
+        <li><a href="/adminPublicaciones.html" class="active">Publicaciones</a></li>
         <li><a href="/">Colegios</a></li>
     </ul>
 </nav>
 
 
 <body>
-   
-   <div class="form-card">
+    <div class="form-card">
 
         <form id="contactForm" action="">
             <div class="mb-3">
@@ -42,7 +41,7 @@
                 <input type="text" class="form-control" name="titulo" id="titulo">
             </div>
 
-           <div class="mb-3">
+            <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label><br>
                 <textarea id="mensaje" class="form-control" name="mensaje" rows="4" cols="50"
                     maxlength="300"></textarea>
@@ -50,32 +49,43 @@
             </div>
 
             <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha</label> <br>
-            <input type="date" class="form-control" name="fecha" id="fecha" required >
-            </div>   
+                <label for="fecha" class="form-label">Fecha</label> <br>
+                <input type="date" class="form-control" name="fecha" id="fecha">
+            </div>
+
+
+            <div class="mb-3">
+                <label for="colegio">Institución</label>
+                <select id="colegio" class="form-control" name="colegio">
+                    <option value="" selected disabled>Seleccion una institución</option>
+                    <option value="general">Colegio Técnico de Heredia</option>
+                    <option value="soporte">Liceo de Alajuela</option>
+                    <option value="sugerencia">CTP Dos Cercas</option>
+                </select>
+            </div>
+
             <button type="reset" class="btn btn-clean" id="btn-clean">Limpiar</button>
             <button type="submit" class="btn btn-submit">Publicar</button>
-
 
         </form>
     </div>
 
-    <div id= "preview" class="preview" style="display: none;">
-        <div class="preview-header">
-            <h5>Vista previa del mensaje</h5>
-        </div>
-        <div class="preview-body">
-            <p><strong>Nombre:</strong> <span id="prevNombre"></span></p>
-            <p><strong>Correo:</strong> <span id="prevCorreo"></span></p>
-            <p><strong>Asunto:</strong> <span id="prevAsunto"></span></p>
-            <p><strong>Mensaje:</strong> <span id="prevMensaje"></span></p>
-        </div>
-    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="assets/js/adminPublicaciones.js"></script>
 </body>
-    <footer class="footer">
-        <p>© 2025 EduForo. Todos los derechos reservados.</p>
 
-    </footer>
+
+<footer class="footer">
+    <p>© 2025 EduForo. Todos los derechos reservados.</p>
+
+</footer>
+
+
+
 </html>
