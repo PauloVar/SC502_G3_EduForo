@@ -1,0 +1,53 @@
+
+:root{
+  --brand: #1d3557;
+  --brand-hover: #16314a;
+  --accent-gold: #c59f3e;
+}
+
+.page-title { color: var(--brand); }
+.page-linkback { text-decoration: none; }
+
+
+.panel {
+  background:#fff;
+  border-radius:10px;
+  padding:1rem;
+  box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+
+.card-min { background:#fff; border-radius:10px; padding:1rem; box-shadow:0 3px 8px rgba(0,0,0,0.08); }
+
+
+.badge-soft { display:inline-block; padding:4px 10px; border-radius:999px; font-size:.8rem; background:#e9ecef; color:#1a1a1a; }
+
+
+.btn-brand { background-color: var(--brand); color:#fff; border:none; }
+.btn-brand:hover { background-color: var(--brand-hover); color:#fff; }
+
+
+.text-muted-90 { color:#6b7280; }
+
+.back-link{
+  display:inline-flex; align-items:center; gap:.4rem;
+  color: var(--brand); font-weight:600; text-decoration:none;
+  padding:.35rem .6rem; border-radius:999px;
+  background:#e9eef6;           /* azul muy suave */
+}
+.back-link:hover{ background:#dbe6f2; color:var(--brand-hover); }
+
+.btn-brand{ background:var(--brand); color:#fff; border:none; }
+.btn-brand:hover{ background:var(--brand-hover); color:#fff; }
+
+.btn-brand-outline{
+  background:transparent; color:var(--brand);
+  border:1px solid var(--brand);
+}
+.btn-brand-outline:hover{
+  background:var(--brand); color:#fff;
+  border-color:var(--brand);
+}
+
+.btn-sm{ padding:.35rem .6rem; border-radius:8px; }
+
