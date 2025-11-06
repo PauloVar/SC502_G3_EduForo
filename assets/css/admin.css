@@ -13,88 +13,6 @@ body {
     margin: 0;
 }
 
-.topbar {
-    background-color: #1d3557;
-    color: #c59f3e;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 25px;
-    margin: 10px 10px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.topbar h1 {
-    font-size: 1.5rem;
-}
-
-.topbar h2 {
-    font-size: 1rem;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo {
-    width: 60px;
-    height: auto;
-    border-radius: 6px;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropbtn {
-    background-color: #c59f3e;
-    border: none;
-    font-size: 0.95rem;
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 20px;
-}
-
-.dropbtn:hover {
-    background-color: #b4b6b9;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: #333;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    transition: background 0.3s;
-}
-
-.dropdown-content a:hover {
-    background-color: #f2f2f2;
-}
-
-.dropdown-content a:hover {
-    background-color: #f2f2f2;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
 .user-info {
     font-size: 0.9rem;
 }
@@ -155,22 +73,17 @@ body {
     color: grey;
 }
 
-.btn-submit {
-    color: white;
-    background-color: #1d3557;
-    border-radius: 20px;
-    padding: 10px;
-    width: 80px;
-    transition: 1s;
+.btn-submit,
+.btn-clean {
+    border-radius: var(--radius);
+    padding: 0.6rem 1.3rem;
+    font-weight: 600;
+    min-width: 120px;
+    transition: transform 0.2s ease;
 }
 
 .btn-clean {
-    color: white;
-    background-color: gray;
-    border-radius: 20px;
-    padding: 10px;
-    width: 80px;
-    transition: 1s;
+   margin-right: 0.5rem;
 }
 
 
