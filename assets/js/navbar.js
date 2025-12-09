@@ -6,7 +6,7 @@ function setupDropdownActions() {
       event.preventDefault();
 
       if (typeof Swal === 'undefined') {
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
       }
 
@@ -16,7 +16,7 @@ function setupDropdownActions() {
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#0d6efd',
       }).then(() => {
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
       });
     });
   });

@@ -13,7 +13,7 @@
 
 <body style="background:#ece9df;">
     <header class="topbar">
-        <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
+        <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
             <div class="mx-auto mb-3" style="width:75px;">
                 <img src="assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
             </div>
@@ -27,8 +27,8 @@
                 <span class="user-caret" aria-hidden="true">▾</span>
             </button>
             <div class="dropdown-content">
-                <a href="perfil.html">Perfil</a>
-                <a href="adminPublicaciones.html">Panel de admin</a>
+                <a href="perfil.php">Perfil</a>
+                <a href="adminPublicaciones.php">Panel de admin</a>
                 <a href="#" data-action="logout">Cerrar sesión</a>
             </div>
         </div>

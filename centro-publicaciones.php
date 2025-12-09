@@ -13,7 +13,7 @@
 
 <body style="background:#ece9df;">
   <header class="topbar">
-    <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
+    <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
       <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
       <span class="logo-title">EduForo</span>
     </a>
@@ -24,15 +24,15 @@
         <span class="user-caret" aria-hidden="true">▾</span>
       </button>
       <div class="dropdown-content">
-        <a href="perfil.html">Perfil</a>
-        <a href="adminPublicaciones.html">Panel de admin</a>
+        <a href="perfil.php">Perfil</a>
+        <a href="adminPublicaciones.php">Panel de admin</a>
         <a href="#" data-action="logout">Cerrar sesión</a>
       </div>
     </div>
   </header>
 
   <main class="container my-4">
-    <a href="centro.html" class="page-linkback">Volver al centro</a>
+    <a href="centro.php" class="page-linkback">Volver al centro</a>
     <h1 class="h4 mt-3 page-title">Publicaciones — Colegio Técnico San José</h1>
 
     <div id="listaCentro" class="row g-3 mt-1">
@@ -41,7 +41,7 @@
           <h5>Inscripción a talleres</h5>
           <p class="small text-muted-90 mb-2">Publicado: 20/10/2025</p>
           <p class="small mb-2">Talleres de robótica y redes — cupo limitado.</p>
-          <a href="publicacion.html" class="btn btn-brand-outline btn-sm">Ver</a>
+          <a href="publicacion.php" class="btn btn-brand-outline btn-sm">Ver</a>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
           <h5>Entrega de notas</h5>
           <p class="small text-muted-90 mb-2">Publicado: 05/10/2025</p>
           <p class="small mb-2">Cronograma y salones asignados...</p>
-          <a href="publicacion.html" class="btn btn-brand-outline btn-sm">Ver</a>
+          <a href="publicacion.php" class="btn btn-brand-outline btn-sm">Ver</a>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           <h5>Feria vocacional</h5>
           <p class="small text-muted-90 mb-2">Publicado: 15/09/2025</p>
           <p class="small mb-2">Universidades invitadas y charlas programadas.</p>
-          <a href="publicacion.html" class="btn btn-brand-outline btn-sm">Ver</a>
+          <a href="publicacion.php" class="btn btn-brand-outline btn-sm">Ver</a>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
           <h5>Convocatoria equipo deportivo</h5>
           <p class="small text-muted-90 mb-2">Publicado: 01/09/2025</p>
           <p class="small mb-2">Fútbol sala masculino y femenino.</p>
-          <a href="publicacion.html" class="btn btn-brand-outline btn-sm">Ver</a>
+          <a href="publicacion.php" class="btn btn-brand-outline btn-sm">Ver</a>
         </div>
       </div>
     </div>

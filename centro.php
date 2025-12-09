@@ -13,7 +13,7 @@
 
 <body style="background:#ece9df;">
   <header class="topbar">
-    <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
+    <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
       <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
       <span class="logo-title">EduForo</span>
     </a>
@@ -24,15 +24,15 @@
         <span class="user-caret" aria-hidden="true">▾</span>
       </button>
       <div class="dropdown-content">
-        <a href="perfil.html">Perfil</a>
-        <a href="adminPublicaciones.html">Panel de admin</a>
+        <a href="perfil.php">Perfil</a>
+        <a href="adminPublicaciones.php">Panel de admin</a>
         <a href="#" data-action="logout">Cerrar sesión</a>
       </div>
     </div>
   </header>
 
   <main class="container my-4">
-    <a href="home.html" class="page-linkback">Volver al buscador</a>
+    <a href="home.php" class="page-linkback">Volver al buscador</a>
 
     <section class="panel mt-3">
       <div class="d-flex align-items-center gap-3">
@@ -49,7 +49,7 @@
       <p>Centro orientado a formación técnica con énfasis en informática, electrónica y gestión...</p>
 
       <div class="d-flex gap-2">
-        <a href="centro-publicaciones.html" class="btn btn-brand btn-sm">Ver publicaciones</a>
+        <a href="centro-publicaciones.php" class="btn btn-brand btn-sm">Ver publicaciones</a>
       </div>
     </section>
   </main>
