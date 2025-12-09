@@ -34,7 +34,7 @@
 
             <div class="enlaces">
                 <p class="form-link">
-                <a href="register.html">Crea cuenta nueva</a>
+                <a href="register.php">Crea cuenta nueva</a>
                 </p>
             </div>
         </form>
