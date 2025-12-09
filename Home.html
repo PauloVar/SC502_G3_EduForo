@@ -14,8 +14,26 @@
 
 
 <body>
-    
-<?php include 'php/componentes/navbar.php'; ?>
+    <header class="topbar">
+
+        <a class="logo-container" href="Home.html" aria-label="Ir al inicio de EduForo">
+            <img src="assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
+            <span class="logo-title">EduForo</span>
+        </a>
+
+        <div class="dropdown">
+            <button type="button" class="dropbtn">
+                <span class="user-avatar" aria-hidden="true">U</span>
+                <span class="user-name">Usuario</span>
+                <span class="user-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="dropdown-content">
+                <a href="perfil.html">Perfil</a>
+                <a href="adminPublicaciones.html">Panel de admin</a>
+                <a href="#" data-action="logout">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
         <main class="main-content">
@@ -48,7 +66,7 @@
                 </div>
 
                 <div class="text-end mt-2">
-                    <a class="btn btn-brand btn-sm" href="mep-avisos.php">Abrir tablón del MEP</a>
+                    <a class="btn btn-brand btn-sm" href="mep-avisos.html">Abrir tablón del MEP</a>
                 </div>
             </section>
 
@@ -103,7 +121,7 @@
 
 
                     <div class="mt-2">
-                        <a href="centro.php" class="btn btn-brand-outline btn-sm">Abrir centro</a>
+                        <a href="centro.html" class="btn btn-brand-outline btn-sm">Abrir centro</a>
                     </div>
                 </div>
 
