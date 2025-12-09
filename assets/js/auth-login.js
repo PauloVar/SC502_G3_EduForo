@@ -9,11 +9,11 @@ document.getElementById("loginForm").addEventListener('submit', function (e) {
     const password = document.getElementById("contrasenna").value.trim();
 
     if (username.length == 0) {
-        // alert("Debe ingresar un usuario")
+        
 
         Swal.fire({
             icon: 'error',
-            title: 'Datos faltantes',
+            title: 'Ingrese su usuario',
             text: 'Debe ingresar un usuario válido.',
             toast: true,
             position: 'top-end',
@@ -28,7 +28,7 @@ document.getElementById("loginForm").addEventListener('submit', function (e) {
     if (!password) {
         Swal.fire({
             icon: 'error',
-            title: 'Datos faltantes',
+            title: 'Ingrese su contraseña',
             text: 'Debe ingresar una contraseña válida.',
             toast: true,
             position: 'top-end',
@@ -39,13 +39,10 @@ document.getElementById("loginForm").addEventListener('submit', function (e) {
         return;
     }
 
-    //Hace login
-
-    //Redirigir a home
     Swal.fire({
         icon: 'success',
         title: 'Éxito',
-        text: 'Inicio de sesión exitoso. Bienvenido: ' + username,
+        text: 'Inicio de sesión exitoso. Bienvenido a EduForo: ' + username,
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
