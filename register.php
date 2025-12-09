@@ -64,7 +64,7 @@
             
             <div class="enlaces">
                 <p class="form-link">
-                ¿Ya tienes cuenta? <a href="login.html">Inicia Sesión</a>
+                ¿Ya tienes cuenta? <a href="login.php">Inicia Sesión</a>
                 </p>
             </div>
         </form>
