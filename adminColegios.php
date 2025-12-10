@@ -36,7 +36,7 @@
 
     <nav class="navBar">
         <ul>
-            <li><a href="/adminPublicaciones.php">Publicaciones</a></li>
+            <li><a href="/adminPublicaciones.php" class="active">Publicaciones</a></li>
             <li><a href="/adminColegios.php" class="active">Colegios</a></li>
         </ul>
     </nav>
@@ -78,6 +78,11 @@
             </div>
 
             <div class="mb-3">
+                <label for="nivel" class="form-label">Nivel</label>
+                <input type="text" class="form-control" name="nivel" id="nivel">
+            </div>
+
+            <div class="mb-3">
                 <label for="direccion" class="form-label">Dirección</label><br>
                 <textarea id="direccion" class="form-control" name="direccion" rows="4" cols="50"
                     maxlength="300"></textarea>
@@ -101,6 +106,7 @@
     </div>
 
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -109,10 +115,7 @@
     <script src="assets/js/navbar.js"></script>
     <script src="assets/js/adminColegios.js"></script>
 
-    <footer class="footer">
-        <p>© 2025 EduForo. Todos los derechos reservados.</p>
-
-    </footer>
+    
 
 </body>
 
