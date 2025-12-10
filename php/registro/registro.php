@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $fechaNac = $_POST["fechaNac"] ?? '';
     $genero = $_POST["genero"] ?? '';
 
-    $claveHash = password_hash($contrasena, PASSWORD_DEFAULT);
+    $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
 
     $conexion = abrirConexion();
 
