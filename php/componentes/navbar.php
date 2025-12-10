@@ -28,7 +28,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $basePath; ?>/mep-avisos.php">
+                    <a class="nav-link" href="<?php echo $basePath; ?>/listar_avisos.php">
                         Avisos MEP
                     </a>
                 </li>
@@ -36,7 +36,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
                 <?php if ($esAdmin): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Administración
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
@@ -51,7 +51,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="<?php echo $basePath; ?>/admin/mep-avisos.php">
+                                <a class="dropdown-item" href="<?php echo $basePath; ?>/mep/listar_avisos.php">
                                     Avisos del MEP
                                 </a>
                             </li>
