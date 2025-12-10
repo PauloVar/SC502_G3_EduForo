@@ -1,3 +1,9 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +20,7 @@
     <div class="create-account-card">
         <h3>Crear Cuenta</h3>
 
-        <form>
+        <form id="frmRegister" name="frmRegister">
 
             <div class="mb-3">
                 <label for="usuario" class="form-label">Nombre Completo</label>
@@ -59,7 +65,7 @@
             <label for="otro" class="form-link">Otro</label>
             </div>
 
-            <button type="submit" class="btn btn-brand btn-register">Registrarse</button>
+            <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-brand btn-register">Registrarse</button>
 
             
             <div class="enlaces">
