@@ -16,7 +16,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo $basePath; ?>/home.php">
-            EduForo
+            EduForo 
         </a>
 
         <div class="collapse navbar-collapse" id="navbarEduforo">

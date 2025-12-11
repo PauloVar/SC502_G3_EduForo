@@ -12,14 +12,6 @@ $response = [
     'debug' => 'inicio',
 ];
 
-/*
-const nombre = document.getElementById("nombre_Completo").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const usuario = document.getElementById("usuario").value.trim();
-        const contrasena = document.getElementById("contrasena").value.trim();
-        const confirmar = document.getElementById("confirm_contrasena").value.trim();
-        const fechaNac = document.getElementById("fechaNac").value;
-        const genero = document.querySelector('input[name="genero"]:checked')?.value;*/
 
 try {
 
