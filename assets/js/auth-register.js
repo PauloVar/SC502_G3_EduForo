@@ -2,10 +2,10 @@ document.getElementById("frmRegister").addEventListener("submit", async function
 
     e.preventDefault();
 
-        const nombre = document.getElementById("nombre_Completo").value.trim();
+        const nombre = document.getElementById("nombre").value.trim();
         const email = document.getElementById("email").value.trim();
         const usuario = document.getElementById("usuario").value.trim();
-        const contrasena = document.getElementById("contrasena").value.trim();
+        const contrasenna = document.getElementById("contrasenna").value.trim();
         const confirmar = document.getElementById("confirm_contrasena").value.trim();
         const fechaNac = document.getElementById("fechaNac").value;
         const genero = document.querySelector('input[name="genero"]:checked')?.value;
@@ -24,7 +24,7 @@ document.getElementById("frmRegister").addEventListener("submit", async function
         }
     });
 
-    if (!nombre || !email || !usuario || !contrasena || !confirmar || !fechaNac || !genero) {
+    if (!nombre || !email || !usuario || !contrasenna || !confirmar || !fechaNac || !genero) {
 
         Toast.fire({
             icon: "warning",
@@ -34,7 +34,7 @@ document.getElementById("frmRegister").addEventListener("submit", async function
         return;
     }
 
-    if (contrasena !== confirmar) {
+    if (contrasenna !== confirmar) {
         Toast.fire({
             icon: "error",
             title: "Las contraseñas no coinciden."
@@ -45,10 +45,10 @@ document.getElementById("frmRegister").addEventListener("submit", async function
 
     const datos = new FormData();
 
-    datos.append("nombre_Completo", nombre);
+    datos.append("nombre", nombre);
     datos.append("email", email);
     datos.append("usuario", usuario);
-    datos.append("contrasena", contrasena);
+    datos.append("contrasena", contrasenna);
     datos.append("confirm_contrasena", confirmar);
     datos.append("fechaNac", fechaNac);
     datos.append("genero", genero);
@@ -111,6 +111,7 @@ document.getElementById("frmRegister").addEventListener("submit", async function
 
 
         /*
+      
         if (nombre.length < 5 || nombre.length > 50) {
             return Swal.fire({
                 icon: 'error',
