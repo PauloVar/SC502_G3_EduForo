@@ -48,5 +48,9 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/js/navbar.js"></script>
 
+  <footer class="footer">
+        <p>© 2025 EduForo. Todos los derechos reservados.</p>
+    </footer>
+
 </body>
 </html>

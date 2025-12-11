@@ -113,7 +113,9 @@ $resultado = $mysqli->query($sql);
     <script src="assets/js/navbar.js"></script>
     <script src="assets/js/adminColegios.js"></script>
 
-    
+    <footer class="footer">
+        <p>© 2025 EduForo. Todos los derechos reservados.</p>
+    </footer>   
 
 </body>
 

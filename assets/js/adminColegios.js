@@ -1,6 +1,5 @@
 document.getElementById("contactForm").addEventListener('submit', function (e) {
-    e.preventDefault();
-
+    
     const nombre    = document.getElementById("nombre").value.trim();
     const codigo    = document.getElementById("codigo").value.trim();
     const provincia = document.getElementById("provincia").value;
@@ -8,9 +7,11 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
     const nivel     = document.getElementById("nivel").value;
     const direccion = document.getElementById("direccion").value.trim();
     const telefono  = document.getElementById("telefono").value.trim();
-    const email     = document.getElementById("email").value.trim();
+    const correo    = document.getElementById("correo").value.trim();
 
+    
     if (nombre.length === 0) {
+        e.preventDefault(); 
         Swal.fire({
             icon: 'error',
             title: 'Datos faltantes',
@@ -23,7 +24,7 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
         });
         return;
     }
-
+    
     if (codigo.length === 0) {
         Swal.fire({
             icon: 'error',
@@ -38,11 +39,11 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
         return;
     }
 
-    if (!provincia) {
+    if (provincia.length === 0) {
         Swal.fire({
             icon: 'error',
             title: 'Datos faltantes',
-            text: 'Debe seleccionar una provincia.',
+            text: 'Debe ingresar un código válido.',
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -52,11 +53,11 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
         return;
     }
 
-    if (!canton) {
+    if (canton.length === 0) {
         Swal.fire({
             icon: 'error',
             title: 'Datos faltantes',
-            text: 'Debe seleccionar un cantón.',
+            text: 'Debe ingresar un canton válido.',
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -108,7 +109,7 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
         return;
     }
 
-    if (email.length === 0) {
+    if (correo.length === 0) {
         Swal.fire({
             icon: 'error',
             title: 'Datos faltantes',
