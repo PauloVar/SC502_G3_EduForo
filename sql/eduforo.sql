@@ -15,10 +15,6 @@ CREATE TABLE usuarios (
   es_admin TINYINT(1) NOT NULL DEFAULT 0
 );
 
-
-INSERT INTO usuarios (nombre, correo, usuario, contrasenna, fecha_nacimiento, genero, es_admin)
-VALUES ('Admin', 'admin@eduforo.com', 'admin', 'admin123', '2000-01-01', 'masculino', 1);
-
 CREATE TABLE centros (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
@@ -58,3 +54,29 @@ CREATE TABLE favoritos (
   CONSTRAINT fk_fav_centro FOREIGN KEY (centro_id) REFERENCES centros(id),
   UNIQUE KEY uq_favorito (usuario_id, centro_id)
 );
+
+
+
+INSERT INTO centros (nombre, codigo, provincia, canton, nivel, direccion, telefono, correo) VALUES
+('Liceo de Heredia', 'LH001', 'Heredia', 'Heredia', 'Secundaria', 'Centro de Heredia', '22600011', 'info@lhcr.com'),
+('Escuela República de Argentina', 'EA002', 'San José', 'San José', 'Primaria', 'Barrio Luján', '22223344', 'argentina@cr.co.cr'),
+('Colegio Técnico Profesional de Flores', 'CT003', 'Heredia', 'Flores', 'Técnico', 'San Joaquín de Flores', '22651122', 'ctpflores@cr.co.cr'),
+('Escuela Pedro Murillo Pérez', 'EP004', 'Alajuela', 'Alajuela', 'Primaria', 'Centro de Alajuela', '24423355', 'pmp@escuelascr.com'),
+('Colegio de Santa Ana', 'CS005', 'San José', 'Santa Ana', 'Secundaria', 'Centro de Santa Ana', '22825500', 'santaana@colegiocr.com'),
+('CTP de Atenas', 'CT006', 'Alajuela', 'Atenas', 'Técnico', 'Atenas centro', '24465080', 'ctpatenas@cr.co.cr');
+
+INSERT INTO publicaciones (centro_id, titulo, resumen, cuerpo, fecha_publicacion) VALUES
+(1, 'Feria Científica 2025', 'Estudiantes presentan proyectos innovadores.', 'El Liceo de Heredia realizó su feria científica con más de 50 proyectos presentados...', NOW()),
+(1, 'Campeonato Deportivo', 'El equipo ganó torneo regional.', 'El equipo de fútbol del Liceo de Heredia logró obtener el primer lugar...', NOW()),
+(2, 'Semana Cultural', 'Actividades artísticas en la escuela.', 'La Escuela República de Argentina celebró su semana cultural con bailes, pintura...', NOW()),
+(3, 'Nuevos Talleres Técnicos', 'Se abren 3 talleres adicionales.', 'El CTP de Flores anunció la apertura de talleres de robótica, redes...', NOW()),
+(4, 'Festival de Lectura', 'Promoción de lectura infantil.', 'La escuela realizó un festival enfocado en hábitos de lectura para niños...', NOW()),
+(5, 'Charlas Motivacionales', 'Dirigidas a estudiantes de secundaria.', 'El Colegio de Santa Ana impartió charlas sobre liderazgo y salud mental...', NOW());
+
+INSERT INTO avisos_mep (titulo, resumen, cuerpo, enlace) VALUES
+('Calendario Escolar 2025', 'Publicación oficial del calendario lectivo.', 'El MEP ha publicado el calendario escolar para el año 2025...', 'https://mep.go.cr/calendario2025'),
+('Actualización Protocolo de Evaluación', 'Cambios aplican desde marzo.', 'Se informa a los centros educativos sobre la actualización del protocolo...', 'https://mep.go.cr/evaluacion2025'),
+('Capacitación Docente Virtual', 'Cursos gratuitos para docentes.', 'Se abre la matrícula para cursos virtuales dirigidos a docentes...', 'https://mep.go.cr/capacitacion'),
+('Guía de Seguridad Digital', 'Recomendaciones para estudiantes.', 'El MEP publicó una guía completa para la prevención de riesgos digitales...', 'https://mep.go.cr/seguridad-digital'),
+('Suspensión de Lecciones por Lluvias', 'Afecta zona norte.', 'Debido a condiciones climáticas fuertes, se suspenden lecciones en ciertas áreas...', 'https://mep.go.cr/comunicados');
+
