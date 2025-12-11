@@ -24,7 +24,7 @@ error_reporting(E_ALL);
 
             <div class="mb-3">
                 <label for="usuario" class="form-label">Nombre Completo</label>
-                <input type="text" minlength="5" maxlength="50" class="form-control" name="nombre_Completo"  placeholder="Ingrese su nombre" id="nombre_Completo">
+                <input type="text" class="form-control" name="nombre"  placeholder="Ingrese su nombre" id="nombre">
             </div>
 
             <div class="mb-3">
@@ -38,8 +38,8 @@ error_reporting(E_ALL);
             </div>
 
             <div class="mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
-                <input type="text" class="form-control" name="contrasena" placeholder="Cree una contraseña" id="contrasena">
+                <label for="contrasenna" class="form-label">Contraseña</label>
+                <input type="text" class="form-control" name="contrasenna" placeholder="Cree una contraseña" id="contrasenna">
             </div>
 
             <div class="mb-3">

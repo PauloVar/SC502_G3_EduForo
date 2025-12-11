@@ -16,15 +16,15 @@ include("../conexionBD.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    $nombre = $_POST["nombre_Completo"] ?? '';
+    $nombre = $_POST["nombre"] ?? '';
     $email = $_POST["email"] ?? '';
     $usuario = $_POST["usuario"] ?? '';
-    $contrasena = $_POST["contrasena"] ?? '';
+    $contrasenna = $_POST["contrasenna"] ?? '';
     $confirmar = $_POST["confirm_contrasena"] ?? '';
     $fechaNac = $_POST["fechaNac"] ?? '';
     $genero = $_POST["genero"] ?? '';
 
-    $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
+    $contrasennaHash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
     $conexion = abrirConexion();
 
@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     VALUES(?,?,?,?,?,?)";
 
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssssss", $nombre, $email, $usuario, $contrasenaHash, $fechaNac, $genero);
+    $stmt->bind_param("ssssss", $nombre, $email, $usuario, $contrasennaHash, $fechaNac, $genero);
 
 
 
