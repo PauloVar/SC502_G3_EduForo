@@ -22,7 +22,7 @@
 
             <div class="mb-3">
                 <label for="contrasenna" class="form-label">Contraseña</label>
-                <input type="text" class="form-control" name="contrasenna" id="contrasenna">
+                <input type="password" class="form-control" name="contrasenna" id="contrasenna">
             </div>
 
              <button type="submit" class="btn btn-brand btn-login">Ingresar</button>
