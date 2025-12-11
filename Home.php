@@ -28,8 +28,8 @@
                 <span class="user-caret" aria-hidden="true">▾</span>
             </button>
             <div class="dropdown-content">
-                <a href="../../perfil.php">Perfil</a>
-                <a href="../../adminPublicaciones.php">Panel de admin</a>
+                <a href="perfil.php">Perfil</a>
+                <a href="adminPublicaciones.php">Panel de admin</a>
                 <a href="#" data-action="logout">Cerrar sesión</a>
             </div>
         </div>
