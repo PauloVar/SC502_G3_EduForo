@@ -1,108 +1,65 @@
 document.getElementById("loginForm").addEventListener('submit', async function (e) {
-
-    //Previene el comportamiento por defecto del componente, en este caso, loginForm
     e.preventDefault();
-
-    
 
     const usuario = document.getElementById("usuario").value.trim();
     const contrasenna = document.getElementById("contrasenna").value.trim();
 
-    if (usuario.length == 0) {
-        
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+    });
 
-        Swal.fire({
-            icon: 'error',
-            title: 'Ingrese su usuario',
-            text: 'Debe ingresar un usuario válido.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true
-        })
-
+    if (usuario.length === 0 || contrasenna.length === 0) {
+        Toast.fire({
+            icon: "warning",
+            title: "Debe ingresar usuario y contraseña."
+        });
         return;
     }
-
-    if (!contrasenna) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Ingrese su contraseña',
-            text: 'Debe ingresar una contraseña válida.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true
-        })
-        return;
-    }
-
-    //Hace login
-
 
     try {
-
         const respuesta = await fetch('php/login/login.php', {
             method: 'POST',
-            header: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ usuario, contrasenna })
-        })
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                usuario: usuario,
+                contrasenna: contrasenna
+            })
+        });
 
-        const texto = await respuesta.text()
-        let data;
-
-        data = JSON.parse(texto)
-
+        const data = await respuesta.json();
+        console.log("Respuesta login:", data);
 
         if (data.status === 'ok') {
+            const msg = data.mensaje || 'Inicio de sesión exitoso';
 
-            //Redirigir a home
-            Swal.fire({
+            Toast.fire({
                 icon: 'success',
-                title: 'Éxito',
-                text: 'Inicio de sesión exitoso. Bienvenido a EduForo: ' + data.nombre,
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true
-            })
+                title: msg
+            });
 
-            setTimeout(() => {
-                window.location.href = "Home.php"
-            }, 3000)
+            setTimeout(function () {
+                window.location.href = 'Home.php';
+            }, 1200);
 
         } else {
-
-
-            Swal.fire({
+            const msg = data.mensaje || 'No se pudo iniciar sesión. Revise sus datos.';
+            Toast.fire({
                 icon: 'error',
-                title: 'Error',
-                text: data.mensaje,
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true
-            })
-
+                title: msg
+            });
         }
 
-
     } catch (error) {
-
-        Swal.fire({
+        console.error(error);
+        Toast.fire({
             icon: 'error',
-            title: 'Error',
-            text: 'No se logró contactar al servidor. Error: ' + error,
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true
-        })
+            title: 'Error de conexión con el servidor.'
+        });
     }
-
 });

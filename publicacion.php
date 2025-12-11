@@ -1,48 +1,147 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require 'php/conexionBD.php';
+require 'php/helpers/auth.php';
+
+$conexion = abrirConexion();
+
+$pubId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+$publicacion = null;
+
+if ($pubId > 0) {
+    $sql = "SELECT  p.id,
+                    p.titulo,
+                    p.resumen,
+                    p.cuerpo,
+                    p.fecha_publicacion,
+                    c.id       AS centro_id,
+                    c.nombre   AS centro_nombre,
+                    c.provincia,
+                    c.canton,
+                    c.nivel
+            FROM publicaciones p
+            INNER JOIN centros c ON p.centro_id = c.id
+            WHERE p.id = ?";
+
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $pubId);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado && $resultado->num_rows === 1) {
+        $publicacion = $resultado->fetch_assoc();
+    }
+
+    $stmt->close();
+}
+
+cerrarConexion($conexion);
+?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publicación — EduForo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/Home.css">
-  <link rel="stylesheet" href="assets/css/public.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <?php echo $publicacion
+            ? htmlspecialchars($publicacion['titulo']) . ' — EduForo'
+            : 'Publicación — EduForo'; ?>
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/Home.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/public.css?v=<?php echo time(); ?>">
 </head>
+
 <body style="background:#ece9df;">
-  <header class="topbar">
-    <div class="logo-container">
-      <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
-      <h1>EduForo</h1>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn btn btn-brand btn-sm">Usuario</button>
-      <div class="dropdown-content">
-        <a href="perfil.php">Perfil</a>
-        <a href="adminPublicaciones.php">Panel de admin</a>
-        <a href="#" data-action="logout">Cerrar sesión</a>
-      </div>
-    </div>
-  </header>
 
-  <main class="container my-4">
-    <a href="centro-publicaciones.php" class="page-linkback">Volver a publicaciones</a>
+<?php include 'php/componentes/navbar.php'; ?>
 
-    <article class="panel mt-3">
-      <h1 class="h4 mb-1 page-title">Inscripción a talleres</h1>
-      <p class="small text-muted-90 mb-2">Centro: Colegio Técnico San José — Publicado: 20/10/2025</p>
+<main class="container my-4">
 
-      <p>Se abren inscripciones para los talleres de robótica y redes. Los cupos son limitados...</p>
+    <?php if (!$publicacion): ?>
 
-      <h2 class="h6 mt-3">Adjuntos</h2>
-      <ul class="small">
-        <li><a href="#" class="text-decoration-none">Programa de talleres (PDF)</a></li>
-      </ul>
-    </article>
-  </main>
-  
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="assets/js/navbar.js"></script>
+        <div class="mb-3">
+            <a href="Home.php" class="small text-muted text-decoration-none">
+                ← Volver al inicio
+            </a>
+        </div>
 
+        <div class="alert alert-warning">
+            No se encontró la publicación solicitada.
+        </div>
+
+    <?php else: ?>
+
+        <div class="mb-3">
+            <a href="centro-publicaciones.php?centro_id=<?php echo $publicacion['centro_id']; ?>"
+               class="small text-muted text-decoration-none">
+                ← Volver a publicaciones de <?php echo htmlspecialchars($publicacion['centro_nombre']); ?>
+            </a>
+        </div>
+
+        <header class="mb-3">
+            <h1 class="h4 mb-1">
+                <?php echo htmlspecialchars($publicacion['titulo']); ?>
+            </h1>
+
+            <p class="small mb-0">
+                Centro:
+                <a href="centro.php?id=<?php echo $publicacion['centro_id']; ?>">
+                    <?php echo htmlspecialchars($publicacion['centro_nombre']); ?>
+                </a>
+            </p>
+
+            <p class="small text-muted mb-0">
+                Publicado:
+                <?php
+                    echo !empty($publicacion['fecha_publicacion'])
+                        ? date('d/m/Y H:i', strtotime($publicacion['fecha_publicacion']))
+                        : 'Sin fecha';
+                ?>
+            </p>
+
+            <p class="small text-muted mb-0">
+                Nivel:
+                <strong><?php echo htmlspecialchars($publicacion['nivel'] ?: 'No registrado'); ?></strong>
+                <?php if (!empty($publicacion['provincia']) || !empty($publicacion['canton'])): ?>
+                    &nbsp;|&nbsp;Ubicación:
+                    <?php
+                        $ubic = [];
+                        if (!empty($publicacion['provincia'])) $ubic[] = $publicacion['provincia'];
+                        if (!empty($publicacion['canton']))    $ubic[] = $publicacion['canton'];
+                        echo htmlspecialchars(implode(', ', $ubic));
+                    ?>
+                <?php endif; ?>
+            </p>
+        </header>
+
+        <section class="panel-publicacion">
+
+            <?php if (!empty($publicacion['resumen'])): ?>
+                <div class="publicacion-resumen mb-3">
+                    <?php echo htmlspecialchars($publicacion['resumen']); ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="publicacion-cuerpo">
+                <?php
+                    echo nl2br(htmlspecialchars($publicacion['cuerpo']));
+                ?>
+            </div>
+
+        </section>
+
+    <?php endif; ?>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

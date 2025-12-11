@@ -5,7 +5,7 @@ function abrirConexion()
 
     $host = "localhost";
     $user = "root";
-    $passwork = "root";
+    $passwork = "Vargas2002#";
     $db = "eduforo";
 
     $mysqli = new mysqli($host, $user, $passwork, $db);
