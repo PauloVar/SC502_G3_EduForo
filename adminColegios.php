@@ -1,3 +1,21 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include 'php/conexionBD.php';
+
+$mysqli = abrirConexion();
+
+$sql = "SELECT id, nombre, codigo, provincia, canton, nivel, direccion, telefono, correo 
+        FROM centros
+        ORDER BY id DESC";
+
+$resultado = $mysqli->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,69 +54,55 @@
 
     <nav class="navBar">
         <ul>
-            <li><a href="/adminPublicaciones.php">Publicaciones</a></li>
+            <li><a href="adminPublicaciones.php" >Publicaciones</a></li>
             <li><a href="/adminColegios.php" class="active">Colegios</a></li>
         </ul>
     </nav>
+
     <div class="form-card">
-
-        <form id="contactForm" action="">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre de la institución</label>
-                <input type="text" class="form-control" name="nombre" id="nombre">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h4 mb-0">Gestión de Centros de educación: Colegios</h1>
+                <p class="small text-muted mb-0">Listado de centros del colegio</p>
             </div>
+            <a href="php/centros/agregar_centro.php" class="btn btn-brand">+ Nuevo colegio</a>
+        </div>
 
-            <div class="mb-3">
-                <label for="codigo" class="form-label">Código</label>
-                <input type="text" class="form-control" name="codigo" id="codigo">
-            </div>
+        <div class="row g-3">
+             <?php if ($resultado->num_rows > 0): ?>
+                <?php while ($fila = $resultado->fetch_assoc()): ?>
+                    <div class="col-md-4 card px-0">
+                        <div class="card-gestion h-100 d-flex flex-column p-4 m-0" style="background: #f1e7c1ff;">
+                            <h5 class="mb-1 text-truncate" title="<?php echo htmlspecialchars($fila['nombre']); ?>">
+                                <?php echo htmlspecialchars($fila['nombre']); ?>
+                            </h5>
 
-            <div class="mb-3">
-                <label for="provincia">Provincia</label>
-                <select id="provincia" class="form-control" name="provincia">
-                    <option value="" selected disabled>Seleccione una provincia</option>
-                    <option value="sanJose">San José</option>
-                    <option value="heredia">Heredia</option>
-                    <option value="alajuela">Alajuela</option>
-                    <option value="cartago">Cartago</option>
-                    <option value="puntarenas">Puntarenas</option>
-                    <option value="limon">Limón</option>
-                    <option value="guanacaste">Guanacaste</option>
-                </select>
-            </div>
+                            <p class="small text-muted-90 mb-3 flex-grow-1">
+                                <?php echo htmlspecialchars(mb_strimwidth($fila['provincia'], 0, 100, "...")); ?>
+                            </p>
 
-            <div class="mb-3">
-                <label for="canton">Cantón</label>
-                <select id="canton" class="form-control" name="canton">
-                    <option value="" selected disabled>Seleccion un cantón</option>
-                    <option value="canton1">Escazú</option>
-                    <option value="canton2">Desamparados</option>
-                    <option value="canton3">Coronado</option>
-                </select>
-            </div>
+                            <span class="badge-soft mb-2 align-self-start">
+                                <?php echo htmlspecialchars($fila['nivel']); ?>
+                            </span>
 
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección</label><br>
-                <textarea id="direccion" class="form-control" name="direccion" rows="4" cols="50"
-                    maxlength="300"></textarea>
-                <p id="contador" class=>0/300</p>
-            </div>
+                            <div class="d-flex gap-2 mt-auto">
+                                <a href="php/centros/editar_centro.php?id=<?php echo $fila['id']; ?>"
+                                    class="btn btn-brand btn-submit">Editar</a>
 
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Número de Teléfono</label>
-                <input type="text" class="form-control" name="telefono" id="telefono">
-            </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Correo electrónico</label>
-                <input type="text" class="form-control" name="email" id="email">
-            </div>
-
-            <button type="reset" class="btn btn-brand-outline btn-clean" id="btn-clean">Limpiar</button>
-            <button type="submit" class="btn btn-brand btn-submit">Publicar</button>
-
-        </form>
+                                <a href="php/centros/eliminar_centro.php?id=<?php echo $fila['id']; ?>"
+                                    class="btn btn-brand">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="col-12">
+                    <p class="text-muted text-center mt-4">No hay avisos registrados.</p>
+                </div>
+            <?php endif; ?>
+        </div>            
     </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -109,10 +113,7 @@
     <script src="assets/js/navbar.js"></script>
     <script src="assets/js/adminColegios.js"></script>
 
-    <footer class="footer">
-        <p>© 2025 EduForo. Todos los derechos reservados.</p>
-
-    </footer>
+    
 
 </body>
 
