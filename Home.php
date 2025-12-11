@@ -14,7 +14,7 @@
 
 
 <body>
-    
+<!--Extiende de navbar.php y previene que ingresen sin estar autenticados -->    
 <?php include 'php/componentes/navbar.php'; ?>
 
     <div class="container">
