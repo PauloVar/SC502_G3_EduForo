@@ -38,7 +38,7 @@
     <nav class="navBar">
         <ul>
             <li><a href="adminPublicaciones.php" class="active">Publicaciones</a></li>
-            <li><a href="adminColegios.php">Colegios</a></li>
+            <li><a href="adminColegios.php" class="active">Colegios</a></li>
         </ul>
     </nav>
 

@@ -4,13 +4,21 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
 $esRutaAdmin = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false);
 $basePath = $esRutaAdmin ? '..' : '.';
 
 
-$estaLogueado = isset($_SESSION['usuario_id']);
+$estaLogueado = isset($_SESSION['id']);
 $esAdmin = $estaLogueado && !empty($_SESSION['es_admin']) && $_SESSION['es_admin'] == 1;
 $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
+
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
+        // Si no está autenticado, redirigir al login
+        header('Location: login.php');
+        exit;
+}
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -28,7 +36,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $basePath; ?>/mep-avisos.php">
+                    <a class="nav-link" href="<?php echo $basePath; ?>/listar_avisos.php">
                         Avisos MEP
                     </a>
                 </li>
@@ -36,7 +44,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
                 <?php if ($esAdmin): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Administración
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
@@ -51,7 +59,7 @@ $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="<?php echo $basePath; ?>/admin/mep-avisos.php">
+                                <a class="dropdown-item" href="<?php echo $basePath; ?>/mep/listar_avisos.php">
                                     Avisos del MEP
                                 </a>
                             </li>

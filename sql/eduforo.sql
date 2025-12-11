@@ -9,13 +9,15 @@ CREATE TABLE usuarios (
   nombre VARCHAR(30) NOT NULL,
   correo VARCHAR(100) NOT NULL UNIQUE,
   usuario VARCHAR(15) NOT NULL UNIQUE,
-  contrasenna VARCHAR(16) NOT NULL,
+  contrasenna VARCHAR(128) NOT NULL,
+  fecha_nacimiento DATE,
+  genero ENUM('masculino', 'femenino', 'otro'),
   es_admin TINYINT(1) NOT NULL DEFAULT 0
 );
 
 
-INSERT INTO usuarios (nombre, correo, usuario, contrasenna, es_admin)
-VALUES ('Admin', 'admin@eduforo.com', 'admin', 'admin123', 1);
+INSERT INTO usuarios (nombre, correo, usuario, contrasenna, fecha_nacimiento, genero, es_admin)
+VALUES ('Admin', 'admin@eduforo.com', 'admin', 'admin123', '2000-01-01', 'masculino', 1);
 
 CREATE TABLE centros (
   id INT AUTO_INCREMENT PRIMARY KEY,

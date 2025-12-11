@@ -5,6 +5,7 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
     const codigo    = document.getElementById("codigo").value.trim();
     const provincia = document.getElementById("provincia").value;
     const canton    = document.getElementById("canton").value;
+    const nivel     = document.getElementById("nivel").value;
     const direccion = document.getElementById("direccion").value.trim();
     const telefono  = document.getElementById("telefono").value.trim();
     const email     = document.getElementById("email").value.trim();
@@ -56,6 +57,20 @@ document.getElementById("contactForm").addEventListener('submit', function (e) {
             icon: 'error',
             title: 'Datos faltantes',
             text: 'Debe seleccionar un cantón.',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true
+        });
+        return;
+    }
+
+    if (nivel.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Datos faltantes',
+            text: 'Debe ingresar un código válido.',
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
