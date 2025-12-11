@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 
-<header class="topbar">
+    <header class="topbar">
         <a class="logo-container" href="../../Home.php" aria-label="Ir al inicio de EduForo">
             <img src="../../assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
             <span class="logo-text-group">
@@ -180,6 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </header>
+
 <div class="form-card">
             <div class="container form-page-container my-4">
                 <div>

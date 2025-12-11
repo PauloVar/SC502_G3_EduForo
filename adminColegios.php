@@ -89,7 +89,7 @@ $resultado = $mysqli->query($sql);
                                 <a href="php/centros/editar_centro.php?id=<?php echo $fila['id']; ?>"
                                     class="btn btn-brand btn-submit">Editar</a>
 
-                                <a href="eliminar_aviso.php?id=<?php echo $fila['id']; ?>"
+                                <a href="php/centros/eliminar_centro.php?id=<?php echo $fila['id']; ?>"
                                     class="btn btn-brand">Eliminar</a>
                             </div>
                         </div>
