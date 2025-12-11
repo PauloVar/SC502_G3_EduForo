@@ -56,6 +56,8 @@ try {
 
     $resultado = $stmt->get_result();
 
+
+
     $response['debug'] = 'consulta ejecutada';
 
     if ($resultado && $resultado->num_rows > 0) {
@@ -68,7 +70,9 @@ try {
             $_SESSION['id']= $fila['id'];
             $_SESSION['nombre']= $fila['nombre'];
             $_SESSION['usuario']= $fila['usuario'];
-
+            //Se agrego 'es_admin' de manera estatica, posteriomente se cambia con el valor sacado de la BD
+            $_SESSION['es_admin'] = '1';
+            $_SESSION['autenticado'] = true;
             $response = [
                 'status' => 'ok',
                 'nombre' => $fila['nombre'],
@@ -92,3 +96,4 @@ try {
 
 echo json_encode($response);
 exit();
+?>

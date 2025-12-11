@@ -4,19 +4,27 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
 $esRutaAdmin = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false);
 $basePath = $esRutaAdmin ? '..' : '.';
 
 
-$estaLogueado = isset($_SESSION['usuario_id']);
+$estaLogueado = isset($_SESSION['id']);
 $esAdmin = $estaLogueado && !empty($_SESSION['es_admin']) && $_SESSION['es_admin'] == 1;
 $nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
+
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
+        // Si no está autenticado, redirigir al login
+        header('Location: login.php');
+        exit;
+}
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo $basePath; ?>/home.php">
-            EduForo 
+            EduForo
         </a>
 
         <div class="collapse navbar-collapse" id="navbarEduforo">
