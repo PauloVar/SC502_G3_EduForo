@@ -58,9 +58,8 @@ $resultado = $mysqli->query($sql);
             <li><a href="/adminColegios.php" class="active">Colegios</a></li>
         </ul>
     </nav>
-    <div class="form-card">
 
-        <form id="contactForm" action="">
+    <div class="form-card">
             <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h1 class="h4 mb-0">Gestión de Centros de educación: Colegios</h1>
@@ -72,8 +71,8 @@ $resultado = $mysqli->query($sql);
         <div class="row g-3">
              <?php if ($resultado->num_rows > 0): ?>
                 <?php while ($fila = $resultado->fetch_assoc()): ?>
-                    <div class="col-md-4 mep-card">
-                        <div class="card-min h-100 d-flex flex-column">
+                    <div class="col-md-4 card px-0">
+                        <div class="card-gestion h-100 d-flex flex-column p-4 m-0" style="background: #f1e7c1ff;">
                             <h5 class="mb-1 text-truncate" title="<?php echo htmlspecialchars($fila['nombre']); ?>">
                                 <?php echo htmlspecialchars($fila['nombre']); ?>
                             </h5>
@@ -82,14 +81,18 @@ $resultado = $mysqli->query($sql);
                                 <?php echo htmlspecialchars(mb_strimwidth($fila['provincia'], 0, 100, "...")); ?>
                             </p>
 
+                            <span class="badge-soft mb-2 align-self-start">
+                                <?php echo htmlspecialchars($fila['nivel']); ?>
+                            </span>
+
                             <div class="d-flex gap-2 mt-auto">
-                                <a href="editar_aviso.php?id=<?php echo $fila['id']; ?>"
+                                <a href="php/centros/editar_centro.php?id=<?php echo $fila['id']; ?>"
                                     class="btn btn-brand btn-submit">Editar</a>
+
+                                <a href="eliminar_aviso.php?id=<?php echo $fila['id']; ?>"
+                                    class="btn btn-brand">Eliminar</a>
                             </div>
-
-
-            
-            </div>
+                        </div>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
@@ -98,7 +101,6 @@ $resultado = $mysqli->query($sql);
                 </div>
             <?php endif; ?>
         </div>            
-        </form>
     </div>
 
 
