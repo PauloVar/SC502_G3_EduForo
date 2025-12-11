@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php endif; ?>
 
-                <form method="post">
+                <form method="post" id="contactForm">
 
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -253,12 +253,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             value="<?php echo htmlspecialchars($correo ?? ''); ?>">
                     </div>
                     
-                    <button type="reset" class="btn btn-brand-outline btn-clean" id="btn-clean">Limpiar</button>
+                    <button type="button" class="btn btn-brand-outline btn-clean" id="btn-clean">Limpiar</button>
                     <button type="submit" class="btn btn-brand btn-submit">Publicar</button>
                     <a href="../../adminColegios.php" class="btn btn-brand-outline btn-clean">Volver al listado</a>
                 </form>
             </div>
-        
+        </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -268,6 +268,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../assets/js/navbar.js"></script>
     <script src="../../assets/js/adminColegios.js"></script>
+
+    <footer class="footer">
+        <p>© 2025 EduForo. Todos los derechos reservados.</p>
+    </footer>
 </body>
 
 </html>
