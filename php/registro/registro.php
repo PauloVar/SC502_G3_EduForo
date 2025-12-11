@@ -1,55 +1,82 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-/*
-const nombre = document.getElementById("nombre_Completo").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const usuario = document.getElementById("usuario").value.trim();
-        const contrasena = document.getElementById("contrasena").value.trim();
-        const confirmar = document.getElementById("confirm_contrasena").value.trim();
-        const fechaNac = document.getElementById("fechaNac").value;
-        const genero = document.querySelector('input[name="genero"]:checked')?.value;*/
+require '../conexionBD.php';
 
-include("../conexionBD.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $nombre      = trim($_POST["nombre"] ?? '');
+    $correo      = trim($_POST["correo"] ?? ($_POST["email"] ?? ''));
+    $usuario     = trim($_POST["usuario"] ?? '');
+    $contrasenna = trim($_POST["contrasenna"] ?? ($_POST["contrasena"] ?? ''));
+    $confirmar   = trim($_POST["confirmar"] ?? ($_POST["confirm_contrasena"] ?? ''));
+    $fecha       = trim($_POST["fecha_nacimiento"] ?? ($_POST["fechaNac"] ?? ''));
+    $genero      = trim($_POST["genero"] ?? '');
 
-    $nombre = $_POST["nombre"] ?? '';
-    $email = $_POST["email"] ?? '';
-    $usuario = $_POST["usuario"] ?? '';
-    $contrasenna = $_POST["contrasenna"] ?? '';
-    $confirmar = $_POST["confirm_contrasena"] ?? '';
-    $fechaNac = $_POST["fechaNac"] ?? '';
-    $genero = $_POST["genero"] ?? '';
+    if ($nombre === '' || $correo === '' || $usuario === '' || $contrasenna === '' || $confirmar === '') {
+        echo "error: complete todos los campos obligatorios";
+        exit;
+    }
+
+    if ($contrasenna !== $confirmar) {
+        echo "error: las contraseñas no coinciden";
+        exit;
+    }
 
     $contrasennaHash = password_hash($contrasenna, PASSWORD_DEFAULT);
 
     $conexion = abrirConexion();
 
     $sql = "INSERT INTO usuarios (nombre, correo, usuario, contrasenna, fecha_nacimiento, genero)
-    VALUES(?,?,?,?,?,?)";
+            VALUES (?, ?, ?, ?, ?, ?);";
 
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssssss", $nombre, $email, $usuario, $contrasennaHash, $fechaNac, $genero);
 
+    if (!$stmt) {
+        echo "error: no se pudo preparar la consulta";
+        cerrarConexion($conexion);
+        exit;
+    }
 
+    $stmt->bind_param(
+        "ssssss",
+        $nombre,
+        $correo,
+        $usuario,
+        $contrasennaHash,
+        $fecha,
+        $genero
+    );
 
-    if($stmt->execute()){
-    echo "ok";
-    }else{
-        echo "error:".$conexion->error;
+    try {
+
+        if ($stmt->execute()) {
+            echo "ok";
         }
 
+    } catch (mysqli_sql_exception $e) {
+
+        if ($e->getCode() == 1062) {
+
+            if (str_contains($e->getMessage(), "'usuario'")) {
+                echo "error: el nombre de usuario ya existe";
+            }
+            elseif (str_contains($e->getMessage(), "'correo'")) {
+                echo "error: el correo ya está registrado";
+            }
+            else {
+                echo "error: datos duplicados";
+            }
+
+        } else {
+            echo "error: " . $e->getMessage();
+        }
+    }
 
     $stmt->close();
     cerrarConexion($conexion);
-
-    
 }
-
-
-
-
 ?>

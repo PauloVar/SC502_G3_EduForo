@@ -10,24 +10,8 @@
   <link rel="stylesheet" href="assets/css/public.css">
 </head>
 <body style="background:#ece9df;">
-  <header class="topbar">
-    <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
-      <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
-      <span class="logo-title">EduForo</span>
-    </a>
-    <div class="dropdown">
-      <button type="button" class="dropbtn">
-        <span class="user-avatar" aria-hidden="true">U</span>
-        <span class="user-name">Usuario</span>
-        <span class="user-caret" aria-hidden="true">▾</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="perfil.php">Perfil</a>
-        <a href="adminPublicaciones.php">Panel de admin</a>
-        <a href="#" data-action="logout">Cerrar sesión</a>
-      </div>
-    </div>
-  </header>
+  
+  <?php include 'php/componentes/navbar.php'; ?>
 
   <main class="container my-4">
     <a href="mep-avisos.php" class="page-linkback">Volver a Avisos del MEP</a>

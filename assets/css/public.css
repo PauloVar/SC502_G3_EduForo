@@ -53,5 +53,49 @@
   font-size: 0.95rem;
 }
 
+.panel-publicacion {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    margin-top: 12px;
+}
 
+.publicacion-resumen {
+    background-color: #edf0f5;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: #202635;
+}
+
+.publicacion-cuerpo {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #202635;
+    line-height: 1.55;
+    text-align: justify;
+}
+
+.perfil-card {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    max-width: 900px;
+    margin: 0 auto 16px auto;
+}
+
+.perfil-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background-color: #f4f4f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #1f3556;
+}
 

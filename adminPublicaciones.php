@@ -1,97 +1,194 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require 'php/conexionBD.php';
+require 'php/helpers/auth.php';
+
+if (!usuarioEstaAutenticado() || !usuarioEsAdmin()) {
+    header('Location: login.php');
+    exit;
+}
+
+$conexion = abrirConexion();
+
+$sqlCentros = "SELECT id, nombre FROM centros ORDER BY nombre ASC";
+$resCentros = $conexion->query($sqlCentros);
+
+$centros = [];
+if ($resCentros && $resCentros->num_rows > 0) {
+    while ($fila = $resCentros->fetch_assoc()) {
+        $centros[] = $fila;
+    }
+}
+
+$centroSeleccionado = isset($_GET['centro_id']) ? (int)$_GET['centro_id'] : 0;
+
+$sqlPub = "SELECT  p.id,
+                   p.titulo,
+                   p.resumen,
+                   p.fecha_publicacion,
+                   c.id        AS centro_id,
+                   c.nombre    AS centro_nombre,
+                   c.nivel,
+                   c.provincia,
+                   c.canton
+           FROM publicaciones p
+           INNER JOIN centros c ON p.centro_id = c.id";
+
+if ($centroSeleccionado > 0) {
+    $sqlPub .= " WHERE c.id = ?";
+}
+
+$sqlPub .= " ORDER BY p.fecha_publicacion DESC";
+
+$publicaciones = [];
+
+if ($centroSeleccionado > 0) {
+    $stmt = $conexion->prepare($sqlPub);
+    $stmt->bind_param("i", $centroSeleccionado);
+    $stmt->execute();
+    $resPub = $stmt->get_result();
+} else {
+    $resPub = $conexion->query($sqlPub);
+}
+
+if ($resPub && $resPub->num_rows > 0) {
+    while ($fila = $resPub->fetch_assoc()) {
+        $publicaciones[] = $fila;
+    }
+}
+
+if (isset($stmt)) {
+    $stmt->close();
+}
+
+cerrarConexion($conexion);
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Educativo</title>
+    <title>Gestión de publicaciones</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
-
 <body>
-    <header class="topbar">
-        <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
-            <img src="assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
-            <span class="logo-text-group">
-                <span class="logo-title">EduForo</span>
-                <span class="logo-subtitle">Panel de administración</span>
-            </span>
-        </a>
-        <div class="dropdown">
-            <button type="button" class="dropbtn">
-                <span class="user-avatar" aria-hidden="true">U</span>
-                <span class="user-name">Usuario</span>
-                <span class="user-caret" aria-hidden="true">▾</span>
-            </button>
-            <div class="dropdown-content">
-                <a href="perfil.php">Perfil</a>
-                <a href="adminPublicaciones.php">Panel de admin</a>
-                <a href="#" data-action="logout">Cerrar sesión</a>
+
+<?php include 'php/componentes/navbar.php'; ?>
+
+<main class="container my-4">
+
+    <section class="admin-panel-card">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h1 class="h4 mb-1">Gestión de publicaciones</h1>
+                <p class="small text-muted mb-0">
+                    Publicaciones creadas por los centros educativos registrados.
+                </p>
             </div>
+
+            <a href="php/centro_publicaciones/crear_publicaciones.php"
+               class="btn btn-brand">
+                + Nueva publicación
+            </a>
         </div>
-    </header>
 
-    <nav class="navBar">
-        <ul>
-            <li><a href="adminPublicaciones.php" class="active">Publicaciones</a></li>
-            <li><a href="adminColegios.php" class="active">Colegios</a></li>
-        </ul>
-    </nav>
-
-    <div class="form-card">
-
-        <form id="contactForm" action="">
-            <div class="mb-3">
-                <label for="titulo" class="form-label">Titulo de la Publicación</label>
-                <input type="text" class="form-control" name="titulo" id="titulo">
-            </div>
-
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label><br>
-                <textarea id="mensaje" class="form-control" name="mensaje" rows="4" cols="50"
-                    maxlength="300"></textarea>
-                <p id="contador" class=>0/300</p>
-            </div>
-
-            <div class="mb-3">
-                <label for="fecha" class="form-label">Fecha</label> <br>
-                <input type="date" class="form-control" name="fecha" id="fecha">
-            </div>
-
-
-            <div class="mb-3">
-                <label for="colegio">Institución</label>
-                <select id="colegio" class="form-control" name="colegio">
-                    <option value="" selected disabled>Seleccione una institución</option>
-                    <option value="colegio1">Colegio Técnico de Heredia</option>
-                    <option value="colegio2">Liceo de Alajuela</option>
-                    <option value="colegio3">CTP Dos Cercas</option>
+        <form method="get" class="row g-2 mb-3">
+            <div class="col-md-8 col-lg-6">
+                <select name="centro_id" class="form-select">
+                    <option value="0">Todas las publicaciones</option>
+                    <?php foreach ($centros as $c): ?>
+                        <option
+                            value="<?php echo $c['id']; ?>"
+                            <?php echo $centroSeleccionado == $c['id'] ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($c['nombre']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
-
-            <button type="reset" class="btn btn-brand-outline btn-clean" id="btn-clean">Limpiar</button>
-            <button type="submit" class="btn btn-brand btn-submit">Publicar</button>
-
+            <div class="col-md-4 col-lg-2 d-grid">
+                <button class="btn btn-brand-outline" type="submit">Filtrar</button>
+            </div>
         </form>
+
+        <?php if (empty($publicaciones)): ?>
+
+    <div class="alert alert-info mb-0">
+        No hay publicaciones registradas para el filtro seleccionado.
     </div>
 
+<?php else: ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <div class="row g-3">
+        <?php foreach ($publicaciones as $pub): ?>
+            <div class="col-md-4">
+                <article class="admin-item-card">
+                    
+                    <h2 class="h6 mb-1">
+                        <?php echo htmlspecialchars($pub['titulo']); ?>
+                    </h2>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="assets/js/navbar.js"></script>
-    <script src="assets/js/adminPublicaciones.js"></script>
+                    <p class="small mb-0">
+                        <?php echo htmlspecialchars($pub['centro_nombre']); ?>
+                    </p>
 
-    <footer class="footer">
-        <p>© 2025 EduForo. Todos los derechos reservados.</p>
+                    <p class="small text-muted mb-1">
+                        <?php
+                            $ubic = [];
+                            if (!empty($pub['nivel']))     $ubic[] = $pub['nivel'];
+                            if (!empty($pub['provincia'])) $ubic[] = $pub['provincia'];
+                            if (!empty($pub['canton']))    $ubic[] = $pub['canton'];
+                            echo htmlspecialchars(implode(' · ', $ubic));
+                        ?>
+                    </p>
 
-    </footer>
+                    <p class="small text-muted mb-2">
+                        <?php
+                            $texto = $pub['resumen'] ?: '';
+                            echo htmlspecialchars(mb_strimwidth($texto, 0, 120, '...'));
+                        ?>
+                    </p>
+
+                    <p class="small text-muted mb-3">
+                        Publicado:
+                        <?php
+                            echo !empty($pub['fecha_publicacion'])
+                                ? date('d/m/Y H:i', strtotime($pub['fecha_publicacion']))
+                                : 'Sin fecha';
+                        ?>
+                    </p>
+
+                    <div class="d-flex gap-2">
+                        <a href="php/centro_publicaciones/editar_publicaciones.php?id=<?php echo $pub['id']; ?>"
+                           class="btn btn-brand-outline flex-fill">
+                            Editar
+                        </a>
+
+                        <a href="php/centro_publicaciones/eliminar_publicaciones.php?id=<?php echo $pub['id']; ?>"
+                           class="btn btn-danger-outline flex-fill">
+                            Eliminar
+                        </a>
+                    </div>
+                </article>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+<?php endif; ?>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/navbar.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,28 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require 'php/conexionBD.php';
+require 'php/helpers/auth.php';
+
+$conexion = abrirConexion();
+
+$sql = "SELECT id, titulo, resumen, cuerpo, enlace, fecha_publicacion
+        FROM avisos_mep
+        ORDER BY fecha_publicacion DESC";
+
+$resultado = $conexion->query($sql);
+
+$avisos = [];
+if ($resultado && $resultado->num_rows > 0) {
+    while ($fila = $resultado->fetch_assoc()) {
+        $avisos[] = $fila;
+    }
+}
+
+cerrarConexion($conexion);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,82 +36,125 @@
   <link rel="stylesheet" href="assets/css/public.css">
 </head>
 
-<body>
+<body style="background:#ece9df;">
 
-  <header class="topbar">
-    <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
-      <img src="assets/img/logo-eduforo.svg" class="logo" alt="EduForo">
-      <span class="logo-title">EduForo</span>
-    </a>
-    <div class="dropdown">
-      <button type="button" class="dropbtn">
-        <span class="user-avatar" aria-hidden="true">U</span>
-        <span class="user-name">Usuario</span>
-        <span class="user-caret" aria-hidden="true">▾</span>
-      </button>
-      <div class="dropdown-content">
-        <a href="perfil.php">Perfil</a>
-        <a href="adminPublicaciones.php">Panel de admin</a>
-        <a href="#" data-action="logout">Cerrar sesión</a>
-      </div>
-    </div>
-  </header>
+  <?php include 'php/componentes/navbar.php'; ?>
 
   <main class="container my-4">
-    <a href="home.php" class="page-linkback">Volver a inicio</a>
-    <h1 class="h4 page-title mt-2 mb-3">Avisos del MEP</h1>
 
-    <form class="row g-2 panel mb-3" id="filtroMep">
-      <div class="col-md-6">
-        <input id="qMep" type="text" class="form-control" placeholder="Buscar por título...">
-      </div>
-      <div class="col-md-3">
-        <select id="tagMep" class="form-select">
-          <option value="">Todas las etiquetas</option>
-          <option value="matrícula">Matrícula</option>
-          <option value="eventos">Eventos</option>
-          <option value="circulares">Circulares</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <button class="btn btn-brand w-100" type="submit">Filtrar</button>
-      </div>
-    </form>
-
-    <div id="listaAvisos" class="row g-3">
-      <div class="col-md-4 mep-card" data-tags="matrícula">
-        <div class="card-min h-100">
-          <h5 class="mb-1">Proceso de matrícula 2026</h5>
-          <span class="badge-soft mb-2">Matrícula</span>
-          <p class="small text-muted-90 mb-2">Fechas y requisitos oficiales para matrícula...</p>
-          <a href="mep-aviso.php" class="btn btn-brand-outline btn-sm">Ver detalle</a>
-        </div>
-      </div>
-      <div class="col-md-4 mep-card" data-tags="eventos">
-        <div class="card-min h-100">
-          <h5 class="mb-1">Feria Nacional de Ciencia</h5>
-          <span class="badge-soft mb-2">Eventos</span>
-          <p class="small text-muted-90 mb-2">Convocatoria y lineamientos para la feria...</p>
-          <a href="mep-aviso.php" class="btn btn-brand-outline btn-sm">Ver detalle</a>
-        </div>
-      </div>
-      <div class="col-md-4 mep-card" data-tags="circulares">
-        <div class="card-min h-100">
-          <h5 class="mb-1">Circular 15-2025: Protocolos</h5>
-          <span class="badge-soft mb-2">Circulares</span>
-          <p class="small text-muted-90 mb-2">Actualización de protocolos institucionales...</p>
-          <a href="mep-aviso.php" class="btn btn-brand-outline btn-sm">Ver detalle</a>
-        </div>
-      </div>
+    <div class="mb-3">
+      <a href="Home.php" class="small text-muted text-decoration-none">
+        ← Volver a inicio
+      </a>
     </div>
 
-    <p id="sinResultados" class="text-muted mt-3" style="display:none;">No hay avisos con ese criterio.</p>
+    <header class="mb-3">
+      <h1 class="h4 mb-1">Avisos del MEP</h1>
+      <p class="small text-muted mb-0">
+        Consulta los avisos generales publicados por el Ministerio de Educación Pública.
+      </p>
+    </header>
+
+    <div id="listaAvisos" class="row g-3">
+      <?php if (empty($avisos)): ?>
+        <div class="col-12">
+          <p class="text-muted mt-3">No hay avisos registrados.</p>
+        </div>
+      <?php else: ?>
+        <?php foreach ($avisos as $aviso): ?>
+          <div class="col-md-4 mep-card" id="aviso-<?php echo $aviso['id']; ?>">
+            <div class="card-min h-100 d-flex flex-column">
+
+              <h5 class="mb-1 text-truncate" title="<?php echo htmlspecialchars($aviso['titulo']); ?>">
+                <?php echo htmlspecialchars($aviso['titulo']); ?>
+              </h5>
+
+              <span class="badge-soft mb-2">
+                <?php
+                  if (!empty($aviso['fecha_publicacion'])) {
+                      echo date('d/m/Y', strtotime($aviso['fecha_publicacion']));
+                  } else {
+                      echo 'Aviso MEP';
+                  }
+                ?>
+              </span>
+
+              <p class="small text-muted-90 mb-2 flex-grow-1">
+                <?php
+                  $texto = $aviso['resumen'] ?: $aviso['cuerpo'];
+                  echo htmlspecialchars(mb_strimwidth($texto, 0, 120, '...'));
+                ?>
+              </p>
+
+              <button
+                type="button"
+                class="btn btn-brand-outline btn-sm mt-auto align-self-start btn-ver-detalle"
+                data-aviso-id="<?php echo $aviso['id']; ?>">
+                Ver detalle
+              </button>
+
+              <div
+                class="aviso-detalle mt-2"
+                id="detalle-<?php echo $aviso['id']; ?>"
+                style="display:none;">
+
+                <p class="small mb-2">
+                  <?php echo nl2br(htmlspecialchars($aviso['cuerpo'])); ?>
+                </p>
+
+                <?php if (!empty($aviso['enlace'])): ?>
+                  <p class="small mb-0">
+                    Más información:
+                    <a href="<?php echo htmlspecialchars($aviso['enlace']); ?>" target="_blank">
+                      <?php echo htmlspecialchars($aviso['enlace']); ?>
+                    </a>
+                  </p>
+                <?php endif; ?>
+              </div>
+
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
+
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="assets/js/navbar.js"></script>
-  <script src="assets/js/mep-avisos.js"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('btn-ver-detalle')) {
+        const id = e.target.getAttribute('data-aviso-id');
+        const detalle = document.getElementById('detalle-' + id);
+        if (!detalle) return;
+
+        if (detalle.style.display === 'none' || detalle.style.display === '') {
+          detalle.style.display = 'block';
+          e.target.textContent = 'Ocultar detalle';
+        } else {
+          detalle.style.display = 'none';
+          e.target.textContent = 'Ver detalle';
+        }
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const hash = window.location.hash;
+      if (!hash || !hash.startsWith('#aviso-')) return;
+
+      const card = document.querySelector(hash);
+      if (!card) return;
+
+      const btn = card.querySelector('.btn-ver-detalle');
+      const detalle = card.querySelector('.aviso-detalle');
+
+      if (btn && detalle) {
+        detalle.style.display = 'block';
+        btn.textContent = 'Ocultar detalle';
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  </script>
 </body>
 
 </html>

@@ -1,99 +1,67 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
-$esRutaAdmin = (strpos($_SERVER['PHP_SELF'], '/admin/') !== false);
-$basePath = $esRutaAdmin ? '..' : '.';
+require_once __DIR__ . '/../helpers/auth.php';
 
 
-$estaLogueado = isset($_SESSION['id']);
-$esAdmin = $estaLogueado && !empty($_SESSION['es_admin']) && $_SESSION['es_admin'] == 1;
-$nombreUsuario = $estaLogueado ? ($_SESSION['usuario'] ?? 'Usuario') : null;
+$baseUrl = '/SC502_G3_EduForo';
 
-if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
-        // Si no está autenticado, redirigir al login
-        header('Location: login.php');
-        exit;
-}
+$estaLogueado  = usuarioEstaAutenticado();
+$esAdmin       = usuarioEsAdmin();
+$nombreUsuario = obtenerNombreUsuario();
 
 ?>
+<header class="encabezado">
+    <div class="encabezado-contenido">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo $basePath; ?>/home.php">
-            EduForo
-        </a>
-
-        <div class="collapse navbar-collapse" id="navbarEduforo">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $basePath; ?>/home.php">
-                        Inicio
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $basePath; ?>/listar_avisos.php">
-                        Avisos MEP
-                    </a>
-                </li>
-
+        <div class="encabezado-marca">
+            <img src="<?php echo $baseUrl; ?>/assets/img/logo-eduforo.svg" alt="Logo" class="logo-icono">
+            <div class="marca-texto">
+                <span class="marca-titulo">EduForo</span>
                 <?php if ($esAdmin): ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Administración
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?php echo $basePath; ?>/admin/centros.php">
-                                    Gestión de centros
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?php echo $basePath; ?>/admin/publicaciones.php">
-                                    Publicaciones de centros
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?php echo $basePath; ?>/mep/listar_avisos.php">
-                                    Avisos del MEP
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    <span class="marca-subtitulo">Panel de administración</span>
                 <?php endif; ?>
-            </ul>
-
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <?php if ($estaLogueado): ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $basePath; ?>/perfil.php">
-                            <?php echo htmlspecialchars($nombreUsuario); ?>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $basePath; ?>/php/login/logout.php">
-                            Cerrar sesión
-                        </a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $basePath; ?>/login.php">
-                            Iniciar sesión
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $basePath; ?>/register.php">
-                            Crear cuenta
-                        </a>
-                    </li>
-                <?php endif; ?>
-            </ul>
+            </div>
         </div>
+
+        <nav class="encabezado-nav">
+            <a href="<?php echo $baseUrl; ?>/Home.php" class="nav-item">Inicio</a>
+
+            <a href="<?php echo $baseUrl; ?>/mep-avisos.php" class="nav-item">Avisos MEP</a>
+
+            <?php if ($esAdmin): ?>
+            <div class="nav-item dropdown">
+                <span class="dropdown-toggle">Administración ▾</span>
+                <div class="dropdown-menu">
+                    <a href="<?php echo $baseUrl; ?>/adminColegios.php">Gestión de centros</a>
+                    <a href="<?php echo $baseUrl; ?>/adminPublicaciones.php">Publicaciones de centros</a>
+
+                    <a href="<?php echo $baseUrl; ?>/php/mep/listar_avisos.php">Avisos del MEP</a>
+                </div>
+            </div>
+            <?php endif; ?>
+        </nav>
+
+        <div class="encabezado-usuario">
+            <?php if ($estaLogueado): ?>
+                <div class="usuario-dropdown">
+                    <button class="usuario-btn">
+                        <span class="usuario-avatar"><?php echo strtoupper($nombreUsuario[0]); ?></span>
+                        <span><?php echo htmlspecialchars($nombreUsuario); ?></span>
+                        <span class="flecha">▾</span>
+                    </button>
+                    <div class="usuario-menu">
+                        <a href="<?php echo $baseUrl; ?>/perfil.php">Mi perfil</a>
+                        <a href="<?php echo $baseUrl; ?>/php/login/logout.php">Cerrar sesión</a>
+                    </div>
+                </div>
+            <?php else: ?>
+                <a href="<?php echo $baseUrl; ?>/login.php" class="btn-login">Iniciar sesión</a>
+                <a href="<?php echo $baseUrl; ?>/register.php" class="btn-register">Crear cuenta</a>
+            <?php endif; ?>
+        </div>
+
     </div>
-</nav>
+</header>
