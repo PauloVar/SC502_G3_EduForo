@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduForo</title>
+    <title>EduForo</title> 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/Home.css">
@@ -15,7 +15,7 @@
 
 <header class="topbar">
         <a class="logo-container" href="Home.php" aria-label="Ir al inicio de EduForo">
-            <img src="|assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
+            <img src="assets/img/logo-eduforo.svg" alt="EduForo Logo" class="logo">
             <span class="logo-text-group">
                 <span class="logo-title">EduForo</span>
                 <span class="logo-subtitle">Panel de administración</span>
