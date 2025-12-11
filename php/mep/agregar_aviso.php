@@ -83,8 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-    <?php include '../componentes/navbar.php'; ?>
-
     <div class="container form-page-container my-4">
         <div class="card card-form">
             <div>
