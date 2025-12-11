@@ -105,26 +105,4 @@ document.getElementById("loginForm").addEventListener('submit', async function (
         })
     }
 
-
-
-
-
-
-    /*
-    //Redirige a Home
-    Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: 'Inicio de sesión exitoso. Bienvenido a EduForo: ' + username,
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 5000,
-        timerProgressBar: true
-    })
-
-    setTimeout(() => {
-        window.location.href = "Home.php"
-    }, 3000)*/
-
 });
