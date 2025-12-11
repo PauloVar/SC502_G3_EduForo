@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($stmt->execute()) {
-            header("Location: SC502_G3_EduForo/adminColegios.php");
+            header("Location: ../../adminColegios.php");
             exit();
         } else {
             $errors[] = "No se pudo guardar el aviso.";
